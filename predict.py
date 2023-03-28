@@ -3,7 +3,6 @@ from cog import BasePredictor, Input, Path
 from transformers import Pix2StructForConditionalGeneration, Pix2StructProcessor
 
 CACHE_DIR = "model-cache"
-MODEL_ID = "THUDM/chatglm-6b"
 
 
 model_urls = {
@@ -38,14 +37,14 @@ class Predictor(BasePredictor):
     def predict(
         self,
         image: Path = Input(description="Input Image."),
-        task: str = Input(
-            description="Choose a task.",
+        model_name: str = Input(
+            description="Choose a model.",
             choices=model_urls.keys(),
             default="screen2words",
         ),
         text: str = Input(description="Input text."),
     ) -> str:
-        model, processor = self.models[task]
+        model, processor = self.models[model_name]
         model.to("cuda")
 
         image = PIL.Image.open(image)
