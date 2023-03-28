@@ -1,0 +1,14 @@
+# Configuration for Cog ⚙️
+# Reference: https://github.com/replicate/cog/blob/main/docs/yaml.md
+
+build:
+  cuda: "11.7"
+  gpu: true
+  python_version: "3.10"
+  python_packages:
+    - "torch==1.13.1"
+    - git+https://github.com/huggingface/transformers.git
+    - "accelerate==0.16.0"
+    - "Pillow==9.4.0"
+
+predict: "predict.py:Predictor"
